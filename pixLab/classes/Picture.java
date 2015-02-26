@@ -98,6 +98,23 @@ public class Picture extends SimplePicture
     }
   }
   
+  public void mirrorHorizontal()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel topPixel = null;
+    Pixel botPixel = null;
+    int width = pixels[0].length;
+    for (int row = 0; row < pixels.length/2; row++)
+    {
+      for (int col = 0; col < width; col++)
+      {
+        topPixel = pixels[row][width - 1 - col];
+        botPixel = pixels[row][col];
+        botPixel.setColor(topPixel.getColor());
+      }
+    }
+  }
+  
   /** Method that mirrors the picture around a 
     * vertical mirror in the center of the picture
     * from left to right */
@@ -118,6 +135,25 @@ public class Picture extends SimplePicture
     } 
   }
   
+  public void mirrorVerticalRightToLeft()
+  { 
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel leftPixel = null;
+    Pixel rightPixel = null;
+    int width = pixels[0].length;
+    for (int row = 0; row < pixels.length; row++)
+    {
+      for (int col = 0; col < width / 2; col++)
+      {
+        leftPixel = pixels[row][col];
+        rightPixel = pixels[row][width - 1 - col];
+        leftPixel.setColor(rightPixel.getColor());
+      }
+    }
+    
+  }
+  
+  
   /** Mirror just part of a picture of a temple */
   public void mirrorTemple()
   {
@@ -136,7 +172,7 @@ public class Picture extends SimplePicture
         
         leftPixel = pixels[row][col];      
         rightPixel = pixels[row]                       
-                         [mirrorPoint - col + mirrorPoint];
+          [mirrorPoint - col + mirrorPoint];
         rightPixel.setColor(leftPixel.getColor());
       }
     }
@@ -150,7 +186,7 @@ public class Picture extends SimplePicture
     * @param startCol the start col to copy to
     */
   public void copy(Picture fromPic, 
-                 int startRow, int startCol)
+                   int startRow, int startCol)
   {
     Pixel fromPixel = null;
     Pixel toPixel = null;
@@ -172,7 +208,7 @@ public class Picture extends SimplePicture
       }
     }   
   }
-
+  
   /** Method to create a collage of several pictures */
   public void createCollage()
   {
